@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+
+{% block body %}
+  <section class="header">
+    <h2 class="title">Job Posting Recommender</h2>
+  </section>
+  <hr />
+
+  <div class="content">
+    <h5>
+        Please enter a job posting you liked, an excerpt from your resume, or just keywords about skills or duties you would like to do in your next job:
+    </h5>
+    <form method="POST">
+      {{ form.hidden_tag() }}
+      <div class="row">
+        <div class="seven columns">
+          {{ form.input.label }}  {{ form.input(class_="u-full-width") }}
+        </div>
+      </div>
+      <div class="row">
+        <button type="submit" class="button-primary">Submit</button>
+      </div>
+    </form>
+    <h3>
+            Check out these jobs:
+    </h3>
+      <h5>
+           {% if prediction[0] %}
+
+            <p><a href={{ prediction[3][1] }} target="_blank"> {{ prediction[3][0] }} </a><br> 
+            <a href={{ prediction[2][1] }} target="_blank"> {{ prediction[2][0] }} </a><br>
+            <a href={{ prediction[1][1] }} target="_blank"> {{ prediction[1][0] }} </a><br>
+            <a href={{ prediction[0][1] }} target="_blank"> {{ prediction[0][0] }} </a><br>
+            <a href={{ prediction[4][1] }} target="_blank"> {{ prediction[4][0] }} </a><br>
+            </p>
+
+           {% else %}
+            Sorry! Didn't find anything :(
+           {% endif %}
+      </h5>
+
+  </div>  
+
+{% endblock body %}
+
+{% block js %}
+
+{% endblock js %}
